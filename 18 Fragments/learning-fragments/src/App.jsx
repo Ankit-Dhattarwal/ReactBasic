@@ -2,6 +2,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FoodItems from "./Components/FoodItems";
 import ErrorMessage from "./Components/ErrorMessage";
+import Container from "./Components/Container";
+import FoodInput from "./Components/FoodInput";
 /// Fragments & Mapping & Conditional Rendering & Passing Data via Props.
 
 /// The main thing to learn is why use the extra div....
@@ -22,6 +24,13 @@ function App() {
   //let FoodItems = [];
   let foodItems = ["Dal", "Green Vegetable", "Milk", "Roti", "Salad", "Ghee"];
 
+  let textToShow = "Food Item Enterend by User";
+
+  const handleOnChange = (event) => {
+    console.log(event.target.value);
+    textToShow = event.target.value;
+  };
+
   // if (FoodItems.length === 0) {
   //   return <h3>I am still hungry.</h3>;
   // }
@@ -32,13 +41,20 @@ function App() {
 
   return (
     <>
-      <h2 className="food-Heading">Healthy Food</h2>
-      {/* This is one way of ternary operator  {FoodItems.length === 0 ? <h3>I am still hungry.</h3> : null} */}
+      <Container>
+        <h2 className="food-Heading">Healthy Food</h2>
+        {/* This is one way of ternary operator  {FoodItems.length === 0 ? <h3>I am still hungry.</h3> : null} */}
 
-      {/* This is second method of ternary operatoremptyMessage*/}
+        {/* This is second method of ternary operatoremptyMessage*/}
 
-      <ErrorMessage itemList={foodItems}></ErrorMessage>
-      <FoodItems itemList={foodItems}></FoodItems>
+        <ErrorMessage itemList={foodItems}></ErrorMessage>
+        <FoodInput handleOnChange={handleOnChange}> </FoodInput>
+        <p>{textToShow}</p>
+        <FoodItems itemList={foodItems}></FoodItems>
+      </Container>
+      <Container>
+        <p>Above is the list of items that are good for your health.</p>
+      </Container>
     </>
   );
 }
