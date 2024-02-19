@@ -4,6 +4,7 @@ import FoodItems from "./Components/FoodItems";
 import ErrorMessage from "./Components/ErrorMessage";
 import Container from "./Components/Container";
 import FoodInput from "./Components/FoodInput";
+import { useState } from "react";
 /// Fragments & Mapping & Conditional Rendering & Passing Data via Props.
 
 /// The main thing to learn is why use the extra div....
@@ -22,13 +23,32 @@ Left and Right side both are same things
 
 function App() {
   //let FoodItems = [];
-  let foodItems = ["Dal", "Green Vegetable", "Milk", "Roti", "Salad", "Ghee"];
+  // let foodItems = ["Dal", "Green Vegetable", "Milk", "Roti", "Salad", "Ghee"];
 
-  let textToShow = "Food Item Enterend by User";
+  // let textStateArr = useState("Food Item Enterend by User");
+  // let textToShow = textStateArr[0];
+  // let setTextState = textStateArr[1];
+  /// The above three line and below three line are same
+  let [textToShow, setTextState] = useState();
 
-  const handleOnChange = (event) => {
-    console.log(event.target.value);
-    textToShow = event.target.value;
+  let [foodItems, setFoodItems] = useState([]);
+
+  console.log(`Current value of textState:${textToShow}`);
+
+  // let textToShow = "Food Item Enterend by User";
+
+  const onKeyDown = (event) => {
+    if (event.key === "Enter") {
+      let newFoodItem = event.target.value;
+      event.target.value = "";
+      /// These three dots are know as spred Operator
+      let newItems = [...foodItems, newFoodItem];
+      setFoodItems(newItems);
+    }
+
+    // console.log(event.target.value);
+    // //textToShow = event.target.value;
+    // setTextState(event.target.value);
   };
 
   // if (FoodItems.length === 0) {
@@ -47,8 +67,8 @@ function App() {
 
         {/* This is second method of ternary operatoremptyMessage*/}
 
+        <FoodInput handleKeyDown={onKeyDown}> </FoodInput>
         <ErrorMessage itemList={foodItems}></ErrorMessage>
-        <FoodInput handleOnChange={handleOnChange}> </FoodInput>
         <p>{textToShow}</p>
         <FoodItems itemList={foodItems}></FoodItems>
       </Container>
