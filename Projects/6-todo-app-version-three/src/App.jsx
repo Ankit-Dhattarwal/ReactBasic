@@ -5,16 +5,23 @@ import TodoItems from "./components/TodoItems";
 import { useState } from "react";
 import WelcomeMessage from "./components/WelcomeMessage";
 function App() {
-  const initialtodoItems = [];
+  // const initialtodoItems = [];
 
   const [todoItems, setTodoItems] = useState([]);
 
+  // const handleNewItem = (itemName, itemDueDate) => {
+  //   const newTodoItem = [
+  //     ...todoItems,
+  //     { name: itemName, dueDate: itemDueDate },
+  //   ];
+  //   setTodoItems(newTodoItem);
+  // };
+
   const handleNewItem = (itemName, itemDueDate) => {
-    const newTodoItem = [
-      ...todoItems,
+    setTodoItems((currValue) => [
+      ...currValue,
       { name: itemName, dueDate: itemDueDate },
-    ];
-    setTodoItems(newTodoItem);
+    ]);
   };
 
   const handleDeleteItem = (todoItemName) => {

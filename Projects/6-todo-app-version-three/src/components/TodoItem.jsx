@@ -19,5 +19,4 @@ function TodoItem({ todoName, todoDate, onDeleteClick }) {
     </div>
   );
 }
-
 export default TodoItem;
